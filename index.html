@@ -887,17 +887,26 @@
                                     .kutu {
                                         width: 180px;
                                         height: 180px;
+                                        animation: donme-mobil 10s linear infinite, suzulme 4s ease-in-out infinite alternate;
                                     }
                                     .golge {
                                         top: 250px;
                                         width: 180px;
                                         height: 25px;
                                     }
+                                    .kutu .govde:nth-child(even) {
+                                        display: none;
+                                    }
                                 }
         
                                 @keyframes donme {
                                     0% { transform: rotateY(0deg) rotateX(15deg); }
                                     100% { transform: rotateY(360deg) rotateX(15deg); }
+                                }
+                                
+                                @keyframes donme-mobil {
+                                    0% { transform: rotateY(0deg) rotateX(15deg) scaleZ(0.55); }
+                                    100% { transform: rotateY(360deg) rotateX(15deg) scaleZ(0.55); }
                                 }
         
                                 @keyframes suzulme {
