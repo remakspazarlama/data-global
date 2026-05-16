@@ -490,7 +490,6 @@
             opacity: 0;
             transform: translateY(40px);
             transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
-            will-change: opacity, transform;
         }
         .reveal-item.in-view {
             opacity: 1;
@@ -797,20 +796,20 @@
                         Tel: 0 324 404 00 58
                     </p>
                     
-                    <a href="https://wa.me/903244040058" target="_blank" style="display: flex; justify-content: center; margin: 5rem auto 0; width: 100%; cursor: pointer; text-decoration: none;">
-                        <div style="transform: scale(0.8); transform-origin: center top;">
+                    <a href="https://wa.me/903244040058" target="_blank" style="display: flex; justify-content: center; margin: 3rem auto 0; width: 100%; cursor: pointer; text-decoration: none;">
+                        <div>
                             <style>
                                 .sahne {
                                     perspective: 1200px;
                                     position: relative;
-                                    width: 330px;
-                                    height: 440px;
+                                    width: 260px;
+                                    height: 350px;
                                     margin: 0 auto;
                                 }
         
                                 .kutu {
-                                    width: 330px;
-                                    height: 330px;
+                                    width: 260px;
+                                    height: 260px;
                                     position: relative;
                                     transform-style: preserve-3d;
                                     will-change: transform, translate;
@@ -868,16 +867,32 @@
         
                                 .golge {
                                     position: absolute;
-                                    top: 450px;
+                                    top: 360px;
                                     left: 50%;
-                                    width: 330px;
-                                    height: 40px;
+                                    width: 260px;
+                                    height: 35px;
                                     background: #D4AF37;
                                     border-radius: 50%;
                                     filter: blur(15px);
                                     transform: translateX(-50%);
                                     animation: golge-anim 4s ease-in-out infinite alternate;
                                     z-index: -1;
+                                }
+        
+                                @media (max-width: 768px) {
+                                    .sahne {
+                                        width: 180px;
+                                        height: 240px;
+                                    }
+                                    .kutu {
+                                        width: 180px;
+                                        height: 180px;
+                                    }
+                                    .golge {
+                                        top: 250px;
+                                        width: 180px;
+                                        height: 25px;
+                                    }
                                 }
         
                                 @keyframes donme {
@@ -1080,8 +1095,14 @@
                         if (bgUrl) {
                             entry.target.style.backgroundImage = `url('${bgUrl}')`;
                             entry.target.removeAttribute('data-bg');
+                            entry.target.classList.remove('lazy-bg');
                         }
                         observer.unobserve(entry.target);
+                        
+                        // Prevent mobile repaint bug by removing transforms after load
+                        setTimeout(() => {
+                            entry.target.style.transform = 'translateZ(0)';
+                        }, 1000);
                     }
                 });
             }, { rootMargin: '0px 0px 300px 0px' }); // Görünür olmadan hemen önce yükle
