@@ -3,1016 +3,774 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Global Teknoloji | Veri Çözümlerinde Yenilikçi Yaklaşımlar</title>
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
+    <title>Data Global Teknoloji - Kurumsal</title>
+    <!-- Art Deco Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600&family=Marcellus&display=swap" rel="stylesheet">
     <style>
         /* ==========================================================================
-           1. CSS DEĞİŞKENLERİ (VARIABLES)
+           DESIGN TOKENS & BASE STYLES
            ========================================================================== */
         :root {
-            /* Renk Paleti */
-            --primary: #2563EB;         /* Temel Mavi */
-            --primary-hover: #1D4ED8;
-            --primary-light: #EFF6FF;
-            
-            --bg-body: #FAFAFA;
-            --bg-white: #FFFFFF;
-            --bg-dark: #0B1121;         /* Çok Koyu Lacivert/Siyah (Stats/Footer için) */
-            --bg-card-dark: #1E293B;    /* Koyu Gri/Mavi (Dark Card için) */
-            
-            --text-heading: #0F172A;
-            --text-body: #475569;
-            --text-muted: #64748B;
-            --text-white: #F8FAFC;
-            
-            --border-light: #E2E8F0;
-            --border-dark: #334155;
-            
-            /* Gölgeler (Shadows) */
-            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
-            --shadow-blue: 0 10px 25px -5px rgba(37, 99, 235, 0.3);
-            
-            /* Ölçüler */
-            --container-w: 1200px;
-            --radius-sm: 8px;
-            --radius-md: 16px;
-            --radius-lg: 24px;
-            
-            /* Geçişler */
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --obsidian: #0A0A0A;
+            --champagne: #F2F0E4;
+            --charcoal: #141414;
+            --gold: #D4AF37;
+            --gold-light: #F2E8C4;
+            --gold-glow: rgba(212, 175, 55, 0.2);
+            --gold-dim: rgba(212, 175, 55, 0.3);
+            --midnight: #1E3D59;
+            --pewter: #888888;
         }
 
-        /* ==========================================================================
-           2. RESET & TEMEL STİLLER
-           ========================================================================== */
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-body);
-            color: var(--text-body);
+            background-color: var(--obsidian);
+            color: var(--champagne);
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 1.1rem;
             line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Yüksek Performanslı Sabit Arka Plan Dokusu (Scroll Donmasını Engeller) */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background-image: 
+                repeating-linear-gradient(45deg, rgba(212, 175, 55, 0.03) 0, rgba(212, 175, 55, 0.03) 1px, transparent 1px, transparent 40px),
+                repeating-linear-gradient(-45deg, rgba(212, 175, 55, 0.03) 0, rgba(212, 175, 55, 0.03) 1px, transparent 1px, transparent 40px);
+            z-index: -1;
+            pointer-events: none;
+            transform: translateZ(0);
         }
 
         h1, h2, h3, h4, h5, h6 {
-            color: var(--text-heading);
-            font-weight: 700;
-            line-height: 1.2;
+            font-family: 'Marcellus', serif;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-weight: 400;
         }
 
-        a {
-            text-decoration: none;
-            color: inherit;
-            transition: var(--transition);
-        }
-
-        ul {
-            list-style: none;
-        }
-
-        img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        /* Düzen Yardımcıları (Layout Utilities) */
         .container {
-            max-width: var(--container-w);
+            max-width: 1440px;
             margin: 0 auto;
-            padding: 0 24px;
+            padding: 0 2rem;
+            min-height: 600px;
         }
 
-        .section-padding {
-            padding: 120px 0;
+        .section {
+            padding: 6rem 0;
+            position: relative;
         }
 
         .text-center { text-align: center; }
+        .text-gold { color: var(--gold); }
+        .text-muted { color: var(--pewter); }
         
-        .section-header {
-            max-width: 600px;
-            margin: 0 auto 60px auto;
-            text-align: center;
-        }
-        
-        .section-header.left {
-            text-align: left;
-            margin: 0 0 60px 0;
-        }
-
-        .section-badge {
-            display: inline-block;
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--primary);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 16px;
-        }
-
-        .section-title {
-            font-size: 36px;
-            margin-bottom: 16px;
-            letter-spacing: -1px;
-        }
-
-        .section-desc {
-            font-size: 18px;
-            color: var(--text-muted);
-        }
+        p { margin-bottom: 1.5rem; }
 
         /* ==========================================================================
-           3. BİLEŞENLER (COMPONENTS)
+           COMPONENTS & DECORATIONS
            ========================================================================== */
         
-        /* Butonlar */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 12px 24px;
-            font-size: 16px;
-            font-weight: 600;
-            border-radius: var(--radius-sm);
-            cursor: pointer;
-            transition: var(--transition);
-            border: 2px solid transparent;
+        /* Sunburst Background */
+        .sunburst-bg {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle at center, rgba(212, 175, 55, 0.15) 0%, transparent 60%);
+            z-index: 0;
+            pointer-events: none;
         }
 
-        .btn-primary {
-            background-color: var(--primary);
-            color: white;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .btn-primary:hover {
-            background-color: var(--primary-hover);
-            box-shadow: var(--shadow-blue);
-            transform: translateY(-2px);
-        }
-
-        .btn-outline {
-            background-color: transparent;
-            color: var(--text-heading);
-            border-color: var(--border-light);
-        }
-
-        .btn-outline:hover {
-            border-color: var(--primary);
-            color: var(--primary);
-            background-color: var(--primary-light);
-        }
-        
-        .btn-link {
-            color: var(--primary);
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .btn-link:hover {
-            color: var(--primary-hover);
-            gap: 12px;
-        }
-
-        /* İkon Kutusu */
-        .icon-box {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
-            background-color: var(--primary-light);
-            color: var(--primary);
+        /* Decorative Dividers */
+        .deco-divider {
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 20px;
+            margin: 2rem 0;
+            gap: 1rem;
         }
-        
-        .icon-box svg {
-            width: 24px;
-            height: 24px;
+        .deco-line {
+            height: 1px;
+            width: 100%;
+            background: var(--gold);
+            opacity: 0.5;
+        }
+        .deco-diamond {
+            width: 8px;
+            height: 8px;
+            background: var(--gold);
+            transform: rotate(45deg);
+            flex-shrink: 0;
         }
 
+        /* Image Placeholder - Double Frame */
+        .image-placeholder {
+            width: 100%;
+            aspect-ratio: 4/3;
+            background-color: var(--charcoal);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--gold);
+            padding: 8px;
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+            transform: translateZ(0); /* Ekran kartı (GPU) hızlandırması */
+            will-change: transform;
+        }
+        .image-placeholder:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px var(--gold-glow);
+        }
+        .image-placeholder-inner {
+            width: 100%;
+            height: 100%;
+            border: 2px solid var(--obsidian);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: repeating-linear-gradient(45deg, #111, #111 10px, #1a1a1a 10px, #1a1a1a 20px);
+        }
+        .placeholder-icon {
+            font-size: 2rem;
+            color: var(--gold-dim);
+            margin-bottom: 0.5rem;
+        }
+        .placeholder-text {
+            font-family: 'Marcellus', serif;
+            color: var(--gold-dim);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        /* Hero Image Placeholder (16:9) */
+        .hero-placeholder {
+            aspect-ratio: 21/9;
+        }
+
+        /* Buttons */
+        .btn-deco {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            font-family: 'Marcellus', serif;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--gold);
+            background: transparent;
+            border: 2px solid var(--gold);
+            text-decoration: none;
+            position: relative;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        .btn-deco:hover {
+            background: var(--gold);
+            color: var(--obsidian);
+            box-shadow: 0 0 20px var(--gold-glow);
+        }
+
+        /* Stepped Cards */
+        .deco-card {
+            background: var(--charcoal);
+            padding: 3rem 2rem;
+            position: relative;
+            border: 1px solid var(--gold-dim);
+            transition: transform 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
+            height: 100%;
+            z-index: 1;
+            transform: translateZ(0);
+            will-change: transform;
+        }
+        .deco-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--gold);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.8), 0 0 20px var(--gold-glow);
+        }
+        
+        /* Stepped Corner Decorations (Top Left, Bottom Right) */
+        .corner-tl, .corner-br {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border-color: var(--gold);
+            border-style: solid;
+            transition: opacity 0.4s ease;
+            opacity: 0.5;
+        }
+        .corner-tl { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
+        .corner-br { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
+        .deco-card:hover .corner-tl, .deco-card:hover .corner-br { opacity: 1; }
+
         /* ==========================================================================
-           4. BÖLÜM STİLLERİ (SECTIONS)
+           LAYOUT SECTIONS
            ========================================================================== */
-           
+        
         /* Header */
-        .site-header {
-            position: fixed;
+        .header {
+            position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 80px;
-            background-color: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border-light);
-            z-index: 100;
-            display: flex;
-            align-items: center;
-        }
-
-        .site-header .container {
-            width: 100%;
+            right: 0;
+            padding: 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            z-index: 100;
+            border-bottom: 1px solid var(--gold-dim);
+            box-shadow: inset 0 -96px 82px -20px rgba(0, 0, 0, 0.5);
         }
-
         .logo {
+            font-family: 'Marcellus', serif;
+            font-size: 1.5rem;
+            color: var(--gold);
+            text-decoration: none;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+        .nav-links {
             display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 20px;
-            font-weight: 800;
-            color: var(--text-heading);
-            letter-spacing: -0.5px;
+            gap: 2rem;
         }
-        
-        .logo-icon {
-            width: 32px;
-            height: 32px;
-            background: linear-gradient(135deg, var(--primary), #60A5FA);
-            border-radius: 8px;
-            position: relative;
+        .nav-links a {
+            color: var(--champagne);
+            text-decoration: none;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: color 0.3s;
         }
-
-        .main-nav {
-            display: flex;
-            gap: 32px;
+        .nav-links a:hover {
+            color: var(--gold);
+            text-shadow: 0 0 8px var(--gold-glow);
         }
 
-        .main-nav a {
-            font-size: 15px;
-            font-weight: 500;
-            color: var(--text-body);
-        }
-
-        .main-nav a:hover {
-            color: var(--primary);
-        }
-
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-        
-        .header-actions .login-link {
-            font-weight: 600;
-            font-size: 15px;
-        }
-
-        /* Mobil Menü Butonu (Varsayılan Gizli) */
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--text-heading);
-            cursor: pointer;
-            padding: 8px;
-        }
-        .mobile-menu-btn svg {
-            width: 28px;
-            height: 28px;
-        }
-        
-        .mobile-only { display: none !important; }
-
-        /* Hero Bölümü */
+        /* Hero Section */
         .hero {
-            padding: 180px 0 100px;
-            background: radial-gradient(circle at 80% 20%, var(--primary-light) 0%, transparent 40%),
-                        radial-gradient(circle at 20% 80%, var(--primary-light) 0%, transparent 40%);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            border-bottom: 2px double var(--gold-dim);
         }
-
         .hero-content {
             text-align: center;
+            position: relative;
+            z-index: 10;
             max-width: 800px;
-            margin: 0 auto 60px;
+            background: rgba(10,10,10,0.8);
+            padding: 3rem;
+            border: 1px solid var(--gold-dim);
+            backdrop-filter: blur(5px);
         }
-
-        .hero h1 {
-            font-size: 64px;
-            letter-spacing: -2px;
-            margin-bottom: 24px;
-            color: var(--text-heading);
-        }
-        
-        .hero h1 span {
-            color: var(--primary);
-        }
-
-        .hero p {
-            font-size: 20px;
-            color: var(--text-muted);
-            margin-bottom: 40px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .hero-btns {
-            display: flex;
-            justify-content: center;
-            gap: 16px;
-        }
-
-        .hero-graphic {
-            width: 100%;
-            max-width: 900px;
-            height: 500px;
-            margin: 0 auto;
-            background-color: white;
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-lg);
-            border: 1px solid var(--border-light);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        /* Sahte Arayüz (Mock UI) */
-        .mock-ui {
-            width: 80%;
-            height: 80%;
-            background: #F8FAFC;
-            border-radius: 12px;
-            border: 1px solid var(--border-light);
-            display: flex;
-            flex-direction: column;
-            padding: 20px;
-            box-shadow: var(--shadow-md);
-        }
-        .mock-header { width: 100%; height: 24px; border-bottom: 1px solid var(--border-light); margin-bottom: 20px; display: flex; gap: 8px;}
-        .mock-dot { width: 10px; height: 10px; border-radius: 50%; background: #CBD5E1; }
-        .mock-body { display: flex; gap: 20px; flex: 1; }
-        .mock-sidebar { width: 20%; background: #E2E8F0; border-radius: 6px; }
-        .mock-content { flex: 1; display: flex; flex-direction: column; gap: 10px; }
-        .mock-line { height: 16px; background: #E2E8F0; border-radius: 4px; }
-        .mock-line.long { width: 100%; }
-        .mock-line.short { width: 60%; }
-        .mock-chart { flex: 1; background: var(--primary-light); border-radius: 6px; margin-top: 20px;}
-
-        /* İstatistik Barı */
-        .stats-bar {
-            background-color: var(--bg-dark);
-            padding: 60px 0;
-            color: white;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 30px;
-            text-align: center;
-        }
-
-        .stat-item h3 {
-            font-size: 40px;
-            color: white;
-            margin-bottom: 8px;
-        }
-
-        .stat-item p {
-            color: var(--primary);
-            font-weight: 600;
-            font-size: 16px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* Dark Cards (Developer & Teams) */
-        .dark-cards-section {
-            background-color: var(--bg-white);
-        }
-
-        .dark-cards-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-        }
-
-        .dark-card {
-            background-color: var(--bg-card-dark);
-            border-radius: var(--radius-lg);
-            padding: 50px;
-            color: white;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .dark-card-badge {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 600;
-            display: inline-block;
-            margin-bottom: 30px;
-        }
-
-        .dark-card h3 {
-            color: white;
-            font-size: 32px;
-            margin-bottom: 20px;
-        }
-
-        .dark-card p {
-            color: #94A3B8;
-            font-size: 18px;
-            margin-bottom: 40px;
-            max-width: 400px;
-        }
-
-        /* Yarı Görsel Alanı (Sağ Kart) */
-        .dark-card.graphic-focused {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #0F172A;
-            border: 1px solid var(--border-dark);
-        }
-        
-        .huge-plus {
-            font-size: 120px;
-            font-weight: 100;
-            color: var(--border-dark);
-        }
-
-        /* Sol/Sağ Özellik (Feature Split) */
-        .feature-split {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-        }
-
-        .feature-split-content h2 {
-            font-size: 40px;
-            margin-bottom: 24px;
-            letter-spacing: -1px;
-        }
-        
-        .feature-split-content p {
-            font-size: 18px;
-            margin-bottom: 30px;
-        }
-        
-        .feature-list {
-            margin-bottom: 40px;
-        }
-        
-        .feature-list li {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 16px;
-            font-weight: 500;
-            color: var(--text-heading);
-        }
-        
-        .feature-list li::before {
-            content: "✓";
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 24px;
-            height: 24px;
-            background-color: var(--primary-light);
-            color: var(--primary);
-            border-radius: 50%;
-            font-size: 14px;
-            font-weight: bold;
-        }
-
-        .feature-split-img {
-            background-color: white;
-            border-radius: var(--radius-lg);
-            padding: 30px;
-            box-shadow: var(--shadow-lg);
-            border: 1px solid var(--border-light);
-            height: 400px;
-            position: relative;
-        }
-
-        /* 6'lı Grid Özellikler */
-        .features-grid-wrapper {
-            background-color: var(--bg-body);
-        }
-        
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-        }
-
-        .feature-card {
-            background: white;
-            padding: 40px;
-            border-radius: var(--radius-md);
-            border: 1px solid var(--border-light);
-            transition: var(--transition);
-        }
-
-        .feature-card:hover {
-            box-shadow: var(--shadow-md);
-            transform: translateY(-5px);
-            border-color: #CBD5E1;
-        }
-
-        .feature-card h3 {
-            font-size: 20px;
-            margin-bottom: 12px;
-        }
-
-        .feature-card p {
-            font-size: 15px;
-        }
-
-        /* Haberler / Blog */
-        .blog-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-        }
-
-        .blog-card {
-            background: white;
-            border-radius: var(--radius-md);
-            overflow: hidden;
-            border: 1px solid var(--border-light);
-            transition: var(--transition);
-        }
-
-        .blog-card:hover {
-            box-shadow: var(--shadow-md);
-        }
-
-        .blog-img {
-            width: 100%;
-            height: 200px;
-            background-color: #E2E8F0;
-        }
-
-        .blog-content {
-            padding: 30px;
-        }
-
-        .blog-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            max-width: 100%;
-            text-align: left;
-            margin-bottom: 60px;
-        }
-        
-        .blog-category {
-            font-size: 13px;
-            color: var(--primary);
-            font-weight: 600;
-            text-transform: uppercase;
-            margin-bottom: 12px;
+        .slide-number {
+            font-family: 'Marcellus', serif;
+            color: var(--gold);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
             display: block;
         }
-
-        .blog-content h3 {
-            font-size: 22px;
-            margin-bottom: 16px;
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 20px rgba(0,0,0,0.8);
         }
         
-        /* Nasıl Çalışır (Adımlar) */
-        .steps-wrapper {
-            background-color: white;
-        }
-        
-        .steps-container {
-            display: flex;
-            justify-content: space-between;
-            position: relative;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        
-        .steps-line {
+        /* Hero Background Placeholder */
+        .hero-bg-placeholder {
             position: absolute;
-            top: 40px;
-            left: 10%;
-            right: 10%;
-            height: 2px;
-            border-top: 2px dashed var(--border-light);
+            top: 0; left: 0; width: 100%; height: 100%;
             z-index: 1;
         }
-        
-        .step-item {
-            text-align: center;
-            width: 250px;
-            position: relative;
-            z-index: 2;
+        .hero-bg-placeholder .image-placeholder {
+            height: 100%;
+            border: none;
         }
-        
-        .step-circle {
-            width: 80px;
-            height: 80px;
-            background: white;
-            border: 2px solid var(--primary-light);
-            border-radius: 50%;
+        .hero-bg-placeholder .image-placeholder-inner {
+            border: none;
+        }
+
+        /* Flex & Grid Systems */
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4rem;
+            align-items: center;
+        }
+        .col-half {
+            flex: 1;
+            min-width: 300px;
+        }
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        /* About Section (Kurumsal Tanıtım) */
+        .about-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .about-text p {
+            color: var(--pewter);
+            text-align: justify;
+        }
+
+        /* Sectors Section */
+        .sectors-bg {
+            background: linear-gradient(to bottom, transparent, rgba(20,20,20,0.8), transparent);
+            border-top: 1px solid var(--gold-dim);
+            border-bottom: 1px solid var(--gold-dim);
+        }
+        .sector-card {
+            text-align: center;
+        }
+        .sector-diamond {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 2rem;
+            border: 1px solid var(--gold);
+            transform: rotate(45deg);
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 24px;
-            font-size: 24px;
-            color: var(--primary);
-            box-shadow: 0 0 0 10px white; /* Çizgiyi kesmek için */
-        }
-        
-        .step-item h3 { margin-bottom: 12px; font-size: 20px;}
-        .step-item p { font-size: 15px;}
-
-        /* FAQ (SSS) Bölümü */
-        .faq-section {
-            background-color: var(--bg-body);
-        }
-        
-        .faq-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-        }
-        
-        .faq-accordion {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-        
-        .faq-item {
-            background: white;
-            border: 1px solid var(--border-light);
-            border-radius: var(--radius-sm);
-            padding: 24px;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-        
-        .faq-item:hover {
-            border-color: var(--primary);
-        }
-        
-        .faq-question {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: 600;
-            color: var(--text-heading);
-            font-size: 18px;
-        }
-        
-        .faq-answer {
-            margin-top: 16px;
-            color: var(--text-body);
-            display: none; /* Basitlik için varsayılan kapalı */
-        }
-        
-        .faq-item.active .faq-answer {
-            display: block;
-        }
-
-        /* Yorumlar (Testimonials) */
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-        }
-        
-        .testimonial-card {
-            background: white;
-            padding: 40px;
-            border-radius: var(--radius-md);
-            border: 1px solid var(--border-light);
-        }
-        
-        .stars {
-            color: #F59E0B;
-            font-size: 18px;
-            margin-bottom: 20px;
-        }
-        
-        .testimonial-text {
-            font-size: 16px;
-            color: var(--text-heading);
-            font-style: italic;
-            margin-bottom: 30px;
-        }
-        
-        .author {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-        
-        .author-img {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            background: #E2E8F0;
-        }
-        
-        .author-info h4 { font-size: 16px; margin-bottom: 4px; }
-        .author-info p { font-size: 14px; color: var(--text-muted); }
-
-        /* Fiyatlandırma (Pricing) */
-        .pricing-section {
-            background-color: var(--bg-body);
-        }
-        
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            align-items: center;
-        }
-        
-        .pricing-card {
-            background: white;
-            border: 1px solid var(--border-light);
-            border-radius: var(--radius-md);
-            padding: 40px;
-            text-align: center;
-        }
-        
-        .pricing-card.popular {
-            border-color: var(--primary);
-            box-shadow: var(--shadow-lg);
-            padding: 60px 40px; /* Ortadakini büyütmek için */
             position: relative;
+            transition: all 0.5s ease;
+            background: var(--charcoal);
         }
-        
-        .popular-badge {
-            position: absolute;
-            top: -14px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--primary);
-            color: white;
-            font-size: 12px;
-            font-weight: 700;
-            padding: 6px 16px;
-            border-radius: 20px;
-            text-transform: uppercase;
+        .sector-card:hover .sector-diamond {
+            background: var(--gold);
+            box-shadow: 0 0 20px var(--gold-glow);
         }
-        
-        .plan-name { font-size: 20px; margin-bottom: 16px; }
-        .plan-price { font-size: 48px; font-weight: 800; color: var(--text-heading); margin-bottom: 24px;}
-        .plan-price span { font-size: 16px; color: var(--text-muted); font-weight: 400;}
-        
-        .plan-features { margin-bottom: 40px; text-align: left; }
-        .plan-features li { margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
-        .plan-features li::before { content: "✓"; color: var(--primary); font-weight: bold; }
-        
-        .pricing-card .btn { width: 100%; }
-
-        /* Final CTA */
-        .final-cta {
-            background-color: var(--bg-dark);
-            padding: 100px 0;
-            text-align: center;
-            color: white;
-        }
-        
-        .final-cta h2 { color: white; font-size: 48px; margin-bottom: 24px; letter-spacing: -1px;}
-        .final-cta p { color: #94A3B8; font-size: 20px; margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto;}
-        
-        .cta-form {
+        .sector-icon-wrapper {
+            transform: rotate(-45deg); /* Counter-rotate content */
+            width: 100%;
+            height: 100%;
             display: flex;
-            max-width: 500px;
-            margin: 0 auto;
-            gap: 12px;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+            transition: color 0.5s;
+        }
+        .sector-card:hover .sector-icon-wrapper {
+            color: var(--obsidian);
         }
         
-        .cta-form input {
-            flex: 1;
-            padding: 16px 24px;
-            border-radius: var(--radius-sm);
-            border: none;
-            outline: none;
-            font-size: 16px;
+        .sector-title {
+            font-size: 1.2rem;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
         }
 
         /* Footer */
-        .site-footer {
-            background-color: var(--bg-white);
-            padding: 80px 0 40px;
-            border-top: 1px solid var(--border-light);
+        .footer {
+            border-top: 2px double var(--gold);
+            padding: 4rem 0 2rem;
+            background: #050505;
         }
-        
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
-            gap: 40px;
-            margin-bottom: 80px;
+        .footer-content {
+            text-align: center;
+            max-width: 100%;
+            margin: 0 auto;
         }
-        
-        .footer-brand p {
-            color: var(--text-muted);
-            margin-top: 20px;
-            max-width: 300px;
+        .footer-logo {
+            font-family: 'Marcellus', serif;
+            color: var(--gold);
+            font-size: 5rem;
+            letter-spacing: 0.2em;
+            margin-bottom: 2rem;
         }
-        
-        .footer-title {
-            font-size: 16px;
-            margin-bottom: 24px;
+        .footer-info {
+            color: var(--pewter);
+            font-size: 1.95rem;
+            line-height: 2;
+            margin-bottom: 2rem;
         }
-        
-        .footer-links li { margin-bottom: 16px; }
-        .footer-links a { color: var(--text-muted); }
-        .footer-links a:hover { color: var(--primary); }
-        
+        .footer-phone {
+            margin-top: 1.5rem;
+            color: var(--gold);
+            font-size: 2.2rem;
+            font-family: 'Marcellus', serif;
+            letter-spacing: 0.1em;
+        }
+        .deco-diamond {
+            width: 16px;
+            height: 16px;
+            background: var(--gold);
+            transform: rotate(49deg);
+            flex-shrink: 0;
+        }
         .footer-bottom {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-top: 30px;
-            border-top: 1px solid var(--border-light);
-            color: var(--text-muted);
-            font-size: 14px;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--gold-dim);
+            color: var(--pewter);
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
         }
         
-        .social-links { display: flex; gap: 16px; }
-        .social-links a { display: block; width: 24px; height: 24px; background: #E2E8F0; border-radius: 4px; }
+        /* Map Container */
+        .map-container {
+            width: 100%;
+            height: 350px;
+            margin: 3rem 0;
+            border-top: 2px solid var(--gold-dim);
+            border-bottom: 2px solid var(--gold-dim);
+            background: var(--charcoal);
+            position: relative;
+            transition: border-color 0.4s ease;
+        }
+        .map-container:hover {
+            border-color: var(--gold);
+        }
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            /* Lüks Dark-Mode Harita Filtresi */
+            filter: grayscale(100%) invert(90%) contrast(80%) sepia(30%) hue-rotate(5deg);
+        }
+        .map-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 10;
+            cursor: pointer;
+            background: rgba(212, 175, 55, 0);
+            transition: background 0.3s ease;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding-bottom: 2rem;
+            text-decoration: none;
+        }
+        .map-overlay:hover {
+            background: rgba(212, 175, 55, 0.05);
+        }
+        .map-address-badge {
+            background: rgba(10, 10, 10, 0.85);
+            border: 1px solid var(--gold);
+            color: var(--champagne);
+            padding: 12px 24px;
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 0.95rem;
+            letter-spacing: 0.1em;
+            white-space: nowrap;
+            backdrop-filter: blur(4px);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+        .map-overlay:hover .map-address-badge {
+            background: var(--gold);
+            color: var(--obsidian);
+            box-shadow: 0 0 20px var(--gold-glow);
+        }
 
-        /* ==========================================================================
-           5. RESPONSIVE (Mobil Uyumluluk)
-           ========================================================================== */
-        @media (max-width: 1024px) {
-            .hero h1 { font-size: 48px; }
-            .stats-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
-            .feature-split { grid-template-columns: 1fr; gap: 40px; }
-            .features-grid { grid-template-columns: 1fr 1fr; }
-            .blog-grid { grid-template-columns: 1fr 1fr; }
-            .faq-container { grid-template-columns: 1fr; gap: 40px; }
-            .testimonials-grid { grid-template-columns: 1fr 1fr; }
-            .pricing-grid { grid-template-columns: 1fr; max-width: 500px; margin: 0 auto; }
-            .pricing-card.popular { padding: 40px; }
-            .footer-grid { grid-template-columns: 1fr 1fr 1fr; }
-            .footer-brand { grid-column: span 3; }
+        /* Responsive */
+        @media (max-width: 992px) {
+            .grid-4 { grid-template-columns: repeat(2, 1fr); }
+            .hero h1 { font-size: 3rem; }
+        }
+        /* Lazy Loading & Scroll Reveal Animations */
+        .reveal-item {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+            will-change: opacity, transform;
+        }
+        .reveal-item.in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
+        .delay-4 { transition-delay: 0.4s; }
+
+        /* Mobile Menu */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 5px;
+            z-index: 101;
+        }
+        .hamburger span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: var(--gold);
+            transition: all 0.3s ease;
+        }
+        .hamburger.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+        @media (max-width: 768px) {
+            .hamburger { display: flex; }
+            .col-half { min-width: 100%; }
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background-color: rgba(10, 10, 10, 0.98);
+                -webkit-backdrop-filter: blur(10px);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: right 0.4s ease;
+                z-index: 100;
+                box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+                gap: 0;
+            }
+            .nav-links.active {
+                right: 0;
+            }
+            .nav-links a {
+                font-size: 1.5rem;
+                margin: 1.5rem 0;
+            }
+            .hero-content { padding: 1.5rem 1rem; width: 70%; }
+            .hero h1 { font-size: 2rem; margin-bottom: 1rem; line-height: 1.2; }
+            .hero p { font-size: 1rem; margin-bottom: 1.5rem !important; }
+            .hero .slide-number { font-size: 1.2rem; margin-bottom: 0.5rem; }
+            .hero .btn-deco { padding: 0.8rem 1.5rem; font-size: 0.85rem; width: 100%; box-sizing: border-box; display: inline-block; }
+            
+            .footer-logo { font-size: 2rem; margin-bottom: 1rem; }
+            .footer-info { font-size: 0.95rem; margin-bottom: 1rem; }
+            .footer-phone { font-size: 1.2rem; }
+            
+            .row { flex-direction: column; }
+            .grid-4 { grid-template-columns: 1fr; }
+            .reveal-item { transition-delay: 0s !important; } /* Disable stagger on mobile */
+            .map-address-badge {
+                white-space: normal;
+                width: 90%;
+                text-align: center;
+                font-size: 0.85rem;
+                padding: 10px;
+            }
+        } /* End of max-width: 768px media query */
+
+        /* Hero Background Images */
+        .hero-bg-placeholder {
+            background-image: url('hero-banner.webp');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.6;
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            z-index: -1;
         }
 
         @media (max-width: 768px) {
-            .section-padding { padding: 80px 0; }
-            
-            .blog-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 24px;
+            .hero-bg-placeholder {
+                background-image: url('hero-mobil.png');
             }
-            
-            /* Mobil Menü Stilleri */
-            .mobile-menu-btn { display: block; }
-            .desktop-only { display: none !important; }
-            .mobile-only { display: flex !important; }
-            
-            .main-nav {
-                position: fixed;
-                top: 80px;
-                left: 0;
-                width: 100%;
-                background-color: white;
-                flex-direction: column;
-                padding: 24px;
-                gap: 20px;
-                box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-                border-top: 1px solid var(--border-light);
-                /* Açılış Animasyonu İçin */
-                transform: translateY(-100%);
-                opacity: 0;
-                visibility: hidden;
-                transition: all 0.3s ease;
-                z-index: 99;
-            }
-            
-            .main-nav.is-open {
-                transform: translateY(0);
-                opacity: 1;
-                visibility: visible;
-            }
-            
-            .main-nav a {
-                font-size: 18px;
-                padding: 12px 0;
-                border-bottom: 1px solid var(--border-light);
-                width: 100%;
-            }
-            .main-nav a:last-child { border-bottom: none; }
-            
-            .header-actions.mobile-only {
-                flex-direction: column;
-                width: 100%;
-                margin-top: 16px;
-                gap: 16px;
-            }
-            .header-actions.mobile-only .btn {
-                width: 100%;
-                text-align: center;
-            }
-            .header-actions.mobile-only .btn-primary {
-                color: white !important;
-            }
-            .hero h1 { font-size: 36px; }
-            .hero p { font-size: 16px; }
-            .hero-btns { flex-direction: column; }
-            .hero-graphic { height: 300px; }
-            .stats-grid { grid-template-columns: 1fr; }
-            .dark-cards-grid { grid-template-columns: 1fr; }
-            .features-grid { grid-template-columns: 1fr; }
-            .blog-grid { grid-template-columns: 1fr; }
-            .steps-container { flex-direction: column; align-items: center; gap: 40px; }
-            .steps-line { display: none; }
-            .testimonials-grid { grid-template-columns: 1fr; }
-            .footer-grid { grid-template-columns: 1fr 1fr; }
-            .footer-brand { grid-column: span 2; }
-            .cta-form { flex-direction: column; }
-            .final-cta h2 { font-size: 32px; }
         }
-
     </style>
 </head>
 <body>
 
-    <!-- 1. HEADER -->
-    <header class="site-header">
-        <div class="container">
-            <a href="#" class="logo">
-                <div class="logo-icon"></div>
-                Data Global
-            </a>
-            
-            <!-- Mobil Hamburger Butonu -->
-            <button class="mobile-menu-btn" id="mobileMenuBtn">
-                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-            </button>
-
-            <nav class="main-nav" id="mainNav">
-                <a href="#ozellikler">Özellikler</a>
-                <a href="#cozumler">Çözümler</a>
-                <a href="#blog">Blog</a>
-                <a href="#fiyatlar">Fiyatlandırma</a>
-                
-                <!-- Mobil İçin Eylemler -->
-                <div class="header-actions mobile-only">
-                    <a href="#" class="login-link">Giriş Yap</a>
-                    <a href="#" class="btn btn-primary">Hemen Başla</a>
-                </div>
-            </nav>
-            
-            <!-- Masaüstü İçin Eylemler -->
-            <div class="header-actions desktop-only">
-                <a href="#" class="login-link">Giriş Yap</a>
-                <a href="#" class="btn btn-primary">Hemen Başla</a>
-            </div>
+    <!-- Header -->
+    <header class="header" style="justify-content: flex-end;">
+        <a href="#" class="logo" style="position: absolute; left: 2rem; top: 0;">
+            <img src="logo.png" alt="Data Global Logo" style="height: 105px; object-fit: contain;">
+        </a>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
+        <nav class="nav-links" id="nav-links">
+            <a href="#kurumsal">Kurumsal</a>
+            <a href="#vizyon">Vizyon</a>
+            <a href="#misyon">Misyon</a>
+            <a href="#sektorler">Sektörler</a>
+            <a href="#iletisim">İletişim</a>
+        </nav>
     </header>
 
-    <!-- 2. HERO -->
-    <section class="hero section-padding">
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg-placeholder">
+        </div>
+        
+        <div class="hero-content reveal-item in-view">
+            <span class="slide-number">I</span>
+            <h1>Geleceğin Dünyasına Değer Katıyoruz</h1>
+            <div class="deco-divider">
+                <div class="deco-line"></div>
+                <div class="deco-diamond"></div>
+                <div class="deco-line"></div>
+            </div>
+            <p class="text-champagne" style="margin-bottom: 2rem;">Yenilikçi vizyon, güçlü yatırımlar ve sürdürülebilir büyüme.</p>
+            <a href="#kurumsal" class="btn-deco">Şirketimizi Keşfedin</a>
+        </div>
+    </section>
+
+    <!-- Kurumsal Tanıtım Section -->
+    <section id="kurumsal" class="section">
+        <div class="sunburst-bg"></div>
         <div class="container">
-            <div class="hero-content">
-                <span class="section-badge">Veri Çözümlerinde Yenilikçi Yaklaşımlar</span>
-                <h1>İş Akışınızı ve Ekibinizi <br><span>Dönüştürün.</span></h1>
-                <p>İşletmenizin dijital potansiyelini açığa çıkarın. Karmaşık veri operasyonlarını basitleştiren, güvenilir ve otonom kurumsal veri mimarileri tasarlıyoruz.</p>
-                <div class="hero-btns">
-                    <a href="#" class="btn btn-primary">Ücretsiz Başla</a>
-                    <a href="#" class="btn btn-outline">Daha Fazla Bilgi</a>
+            <div class="row">
+                <div class="col-half reveal-item">
+                    <div class="image-placeholder">
+                        <div class="image-placeholder-inner lazy-bg" data-bg="biz-kimiz.webp" style="background-size: cover; background-position: center; filter: grayscale(20%);">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-half about-text reveal-item delay-1">
+                    <h2 class="text-gold">Biz Kimiz ?</h2>
+                    <div class="deco-divider" style="justify-content: flex-start;">
+                        <div class="deco-diamond"></div>
+                        <div class="deco-line"></div>
+                    </div>
+                    <p>2018 yılında Mersin’de kurulan Data Global Teknoloji, teknoloji, yazılım, otomotiv, inşaat ve araç kiralama sektörlerinde faaliyet gösteren yenilikçi ve çok yönlü bir şirkettir.</p>
+                    <p>Kurulduğu günden bu yana kalite, güven ve sürdürülebilir büyüme anlayışını temel prensip edinmiş olan şirketimiz; modern dünyanın ihtiyaçlarına uygun çözümler geliştirerek sektörlerinde fark yaratmayı hedeflemektedir.</p>
+                    <p>Teknolojik altyapısı, dinamik vizyonu ve profesyonel çalışma anlayışıyla faaliyet alanlarını sürekli genişleten Data Global Teknoloji, müşteri memnuniyetini ve uzun vadeli iş ortaklıklarını ön planda tutmaktadır.</p>
+                    <p>Yerel gücünü global hedeflerle birleştiren şirketimiz, yenilikçi projeleri ve güçlü yatırımlarıyla geleceğin dünyasına değer katmaya devam etmektedir. Data Global Teknoloji, güvenilir hizmet anlayışı ve kurumsal yapısıyla bugün olduğu gibi gelecekte de büyümeyi, üretmeyi ve geliştirmeyi sürdürecektir.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vizyonumuz Section -->
+    <section id="vizyon" class="section sectors-bg">
+        <div class="container">
+            <div class="row" style="flex-direction: row-reverse;">
+                <div class="col-half reveal-item delay-1">
+                    <div class="image-placeholder">
+                        <div class="image-placeholder-inner lazy-bg" data-bg="vizyon.webp" style="background-size: cover; background-position: center; filter: grayscale(20%);">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-half reveal-item">
+                    <div class="deco-card">
+                        <div class="corner-tl"></div>
+                        <div class="corner-br"></div>
+                        <h2 class="text-gold" style="font-size: 2rem; margin-bottom: 1.5rem;">Vizyonumuz</h2>
+                        <div class="deco-divider" style="justify-content: flex-start; margin-bottom: 2rem;">
+                            <div class="deco-diamond"></div>
+                            <div class="deco-line"></div>
+                        </div>
+                        <p class="text-muted">Teknoloji ve inovasyonu merkeze alan yaklaşımımızla; Türkiye’nin öncü çok sektörlü şirketlerinden biri olmak ve uluslararası pazarda güçlü bir marka haline gelmek.</p>
+                        <p class="text-muted" style="margin-bottom:0;">Sürekli gelişen dijital dünyaya uyum sağlayan, modern çözümler üreten ve geleceğin ihtiyaçlarını bugünden şekillendiren bir yapı inşa ederek; sürdürülebilir büyümeyi ve sektörel liderliği kalıcı hale getirmeyi hedefliyoruz.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Misyonumuz Section -->
+    <section id="misyon" class="section">
+        <div class="sunburst-bg"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-half reveal-item">
+                    <div class="image-placeholder">
+                        <div class="image-placeholder-inner lazy-bg" data-bg="misyon.webp" style="background-size: cover; background-position: center; filter: grayscale(20%);">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-half about-text reveal-item delay-1">
+                    <h2 class="text-gold">Misyonumuz</h2>
+                    <div class="deco-divider" style="justify-content: flex-start;">
+                        <div class="deco-diamond"></div>
+                        <div class="deco-line"></div>
+                    </div>
+                    <p>Data Global Teknoloji olarak; teknoloji, yazılım, otomotiv, inşaat ve araç kiralama sektörlerinde yenilikçi, güvenilir ve sürdürülebilir çözümler üretmeyi hedefliyoruz.</p>
+                    <p>2018 yılından bu yana müşteri memnuniyetini, kaliteyi ve sürekli gelişimi temel ilke edinerek; güçlü altyapımız ve dinamik ekibimizle iş ortaklarımıza katma değer sağlayan projeler geliştiriyoruz.</p>
+                    <p>Yerel gücümüzü global vizyonla birleştirerek, faaliyet gösterdiğimiz tüm alanlarda güven veren bir marka olmayı amaçlıyoruz.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sektörler Section -->
+    <section id="sektorler" class="section sectors-bg">
+        <div class="container">
+            <div class="text-center reveal-item" style="margin-bottom: 5rem;">
+                <h2 style="font-size: 2.5rem;">Faaliyet Alanlarımız</h2>
+                <div class="deco-divider">
+                    <div class="deco-line"></div>
+                    <div class="deco-diamond"></div>
+                    <div class="deco-diamond" style="transform: rotate(45deg) scale(1.5); margin: 0 5px;"></div>
+                    <div class="deco-diamond"></div>
+                    <div class="deco-line"></div>
                 </div>
             </div>
             
-            <div class="hero-graphic">
-                <div class="mock-ui">
-                    <div class="mock-header">
-                        <div class="mock-dot"></div><div class="mock-dot"></div><div class="mock-dot"></div>
+            <div class="grid-4">
+                <!-- Sektör 1 -->
+                <div class="sector-card reveal-item delay-1">
+                    <div class="sector-diamond">
+                        <div class="sector-icon-wrapper">
+                            <span style="font-family: 'Marcellus'; font-size: 2rem;">I</span>
+                        </div>
                     </div>
-                    <div class="mock-body">
-                        <div class="mock-sidebar"></div>
-                        <div class="mock-content">
-                            <div class="mock-line long"></div>
-                            <div class="mock-line short"></div>
-                            <div class="mock-chart"></div>
+                    <h3 class="sector-title text-gold">Yazılım & Teknoloji</h3>
+                    <div class="image-placeholder" style="aspect-ratio: 1/1; margin-top: 1.5rem;">
+                        <div class="image-placeholder-inner lazy-bg" data-bg="yazilim.webp" style="background-size: cover; background-position: center; filter: grayscale(20%);">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sektör 2 -->
+                <div class="sector-card reveal-item delay-2">
+                    <div class="sector-diamond">
+                        <div class="sector-icon-wrapper">
+                            <span style="font-family: 'Marcellus'; font-size: 2rem;">II</span>
+                        </div>
+                    </div>
+                    <h3 class="sector-title text-gold">İnşaat</h3>
+                    <div class="image-placeholder" style="aspect-ratio: 1/1; margin-top: 1.5rem;">
+                        <div class="image-placeholder-inner lazy-bg" data-bg="inşaat.webp" style="background-size: cover; background-position: center; filter: grayscale(20%);">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sektör 3 -->
+                <div class="sector-card reveal-item delay-3">
+                    <div class="sector-diamond">
+                        <div class="sector-icon-wrapper">
+                            <span style="font-family: 'Marcellus'; font-size: 2rem;">III</span>
+                        </div>
+                    </div>
+                    <h3 class="sector-title text-gold">Otomotiv</h3>
+                    <div class="image-placeholder" style="aspect-ratio: 1/1; margin-top: 1.5rem;">
+                        <div class="image-placeholder-inner lazy-bg" data-bg="otomotiv.webp" style="background-size: cover; background-position: center; filter: grayscale(20%);">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sektör 4 -->
+                <div class="sector-card reveal-item delay-4">
+                    <div class="sector-diamond">
+                        <div class="sector-icon-wrapper">
+                            <span style="font-family: 'Marcellus'; font-size: 2rem;">IV</span>
+                        </div>
+                    </div>
+                    <h3 class="sector-title text-gold">Araç Kiralama</h3>
+                    <div class="image-placeholder" style="aspect-ratio: 1/1; margin-top: 1.5rem;">
+                        <div class="image-placeholder-inner lazy-bg" data-bg="arac-kiralama.webp" style="background-size: cover; background-position: center; filter: grayscale(20%);">
                         </div>
                     </div>
                 </div>
@@ -1020,471 +778,336 @@
         </div>
     </section>
 
-    <!-- 3. STATS BAR -->
-    <section class="stats-bar">
+    <!-- Footer -->
+    <footer id="iletisim" class="footer">
         <div class="container">
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <h3>200k+</h3>
-                    <p>Aktif Kullanıcı</p>
+            <div class="footer-content">
+                <div class="footer-logo">DATA GLOBAL</div>
+                <div class="deco-divider">
+                    <div class="deco-line" style="width: 100%;"></div>
+                    <div class="deco-diamond"></div>
+                    <div class="deco-line" style="width: 100%;"></div>
                 </div>
-                <div class="stat-item">
-                    <h3>99.9%</h3>
-                    <p>Uptime Süresi</p>
-                </div>
-                <div class="stat-item">
-                    <h3>24/7</h3>
-                    <p>Canlı Destek</p>
-                </div>
-                <div class="stat-item">
-                    <h3>10M+</h3>
-                    <p>Veri İşlemi</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 4. DARK CARDS (DEVELOPERS & TEAMS) -->
-    <section class="dark-cards-section section-padding">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-badge">Data Global Farkı</span>
-                <h2 class="section-title">Hem Ekipler Hem Geliştiriciler İçin</h2>
-            </div>
-            
-            <div class="dark-cards-grid">
-                <div class="dark-card">
-                    <span class="dark-card-badge">Geliştiriciler İçin</span>
-                    <h3>Güçlü API Altyapısı</h3>
-                    <p>Modern REST API ve GraphQL destekli mimarimizle kendi sistemlerinize anında entegre olun. Esnekliği hissedin.</p>
-                    <a href="#" class="btn-link" style="color: white;">Dokümantasyonu İncele →</a>
-                </div>
-                <div class="dark-card graphic-focused">
-                    <div class="huge-plus">+</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 5. FEATURE SPLIT (LEFT/RIGHT) -->
-    <section id="ozellikler" class="feature-split-section section-padding" style="background-color: var(--bg-body);">
-        <div class="container">
-            <div class="feature-split">
-                <div class="feature-split-content">
-                    <span class="section-badge">Üretkenlik</span>
-                    <h2>Veri İle Geleceği İnşa Edin</h2>
-                    <p>Dağınık verilerinizi anlamlı içgörülere dönüştürün. Otomatize edilmiş iş akışları sayesinde ekibinizin odaklanmasını sağlayın.</p>
+                
+                <div class="footer-info">
+                    <p style="margin-bottom: 0.5rem; color: var(--champagne); text-transform: uppercase; letter-spacing: 0.1em;">
+                        Data Global Teknoloji Gıda A.Ş.
+                    </p>
+                    <p class="footer-phone">
+                        Tel: 0 324 404 00 58
+                    </p>
                     
-                    <ul class="feature-list">
-                        <li>Gerçek zamanlı veri senkronizasyonu</li>
-                        <li>Yapay zeka destekli raporlama</li>
-                        <li>Kişiselleştirilebilir panolar (Dashboards)</li>
-                    </ul>
-                    
-                    <a href="#" class="btn-link">Tüm Özellikleri Keşfet →</a>
-                </div>
-                <div class="feature-split-img">
-                    <div class="mock-ui" style="width: 100%; height: 100%;">
-                        <div class="mock-header"></div>
-                        <div class="mock-body" style="flex-direction: column;">
-                            <div class="mock-line long"></div>
-                            <div class="mock-chart"></div>
+                    <a href="https://wa.me/903244040058" target="_blank" style="display: flex; justify-content: center; margin: 5rem auto 0; width: 100%; cursor: pointer; text-decoration: none;">
+                        <div style="transform: scale(0.8); transform-origin: center top;">
+                            <style>
+                                .sahne {
+                                    perspective: 1200px;
+                                    position: relative;
+                                    width: 330px;
+                                    height: 440px;
+                                    margin: 0 auto;
+                                }
+        
+                                .kutu {
+                                    width: 330px;
+                                    height: 330px;
+                                    position: relative;
+                                    transform-style: preserve-3d;
+                                    will-change: transform, translate;
+                                    animation: donme 10s linear infinite, suzulme 4s ease-in-out infinite alternate;
+                                }
+        
+                                .katman {
+                                    position: absolute;
+                                    inset: 0;
+                                    border-radius: 45px;
+                                    display: flex;
+                                    justify-content: center;
+                                    align-items: center;
+                                    transform-style: preserve-3d;
+                                }
+        
+                                .cam-yuzey {
+                                    background: linear-gradient(135deg, rgba(212, 175, 55, 0.3) 0%, rgba(255, 255, 255, 0.02) 100%);
+                                    border: 2px solid rgba(212, 175, 55, 0.8);
+                                    box-shadow: inset 0 0 20px #D4AF37;
+                                }
+        
+                                .cam-yuzey::after {
+                                    content: '';
+                                    position: absolute;
+                                    inset: 0;
+                                    border-radius: 45px;
+                                    z-index: -1;
+                                    -webkit-backdrop-filter: blur(0px);
+                                    backdrop-filter: blur(0px);
+                                    -webkit-filter: url(#container-glass);
+                                    filter: url(#container-glass);
+                                    overflow: hidden;
+                                    isolation: isolate;
+                                }
+        
+                                .govde {
+                                    background: transparent;
+                                    border: 1.5px solid #D4AF37;
+                                }
+        
+                                .ikon-merkez {
+                                    transform: translateZ(0px);
+                                    filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.8));
+                                    border: 1.5px solid #D4AF37;
+                                    width: 100%;
+                                    height: 100%;
+                                }
+        
+                                .wp-logosu {
+                                    width: 100%;
+                                    height: 73%;
+                                    fill: #ffffff;
+                                }
+        
+                                .golge {
+                                    position: absolute;
+                                    top: 450px;
+                                    left: 50%;
+                                    width: 330px;
+                                    height: 40px;
+                                    background: #D4AF37;
+                                    border-radius: 50%;
+                                    filter: blur(15px);
+                                    transform: translateX(-50%);
+                                    animation: golge-anim 4s ease-in-out infinite alternate;
+                                    z-index: -1;
+                                }
+        
+                                @keyframes donme {
+                                    0% { transform: rotateY(0deg) rotateX(15deg); }
+                                    100% { transform: rotateY(360deg) rotateX(15deg); }
+                                }
+        
+                                @keyframes suzulme {
+                                    0% { translate: 0 0px; }
+                                    100% { translate: 0 -25px; }
+                                }
+        
+                                @keyframes golge-anim {
+                                    0% { transform: translateX(-50%) scale(1); opacity: 0.8; }
+                                    100% { transform: translateX(-50%) scale(0.6); opacity: 0.2; }
+                                }
+                                
+                                .signal-1 { animation: signal-fade 1.5s infinite 0.0s; opacity: 0; }
+                                .signal-2 { animation: signal-fade 1.5s infinite 0.2s; opacity: 0; }
+                                .signal-3 { animation: signal-fade 1.5s infinite 0.4s; opacity: 0; }
+        
+                                @keyframes signal-fade {
+                                    0% { opacity: 0; }
+                                    30% { opacity: 1; }
+                                    100% { opacity: 0; }
+                                }
+                            </style>
+        
+                            <svg style="display: none">
+                                <filter id="container-glass" x="0%" y="0%" width="100%" height="100%">
+                                    <feTurbulence type="fractalNoise" baseFrequency="0.008 0.008" numOctaves="2" seed="92" result="noise" />
+                                    <feGaussianBlur in="noise" stdDeviation="0.02" result="blur" />
+                                    <feDisplacementMap in="SourceGraphic" in2="blur" scale="30" xChannelSelector="R" yChannelSelector="G" />
+                                </filter>
+                                <filter id="edge-glass" x="-20%" y="-20%" width="140%" height="140%">
+                                    <feTurbulence type="fractalNoise" baseFrequency="0.010" numOctaves="2" seed="5" result="noise" />
+                                    <feGaussianBlur in="noise" stdDeviation="0.5" result="blur" />
+                                    <feDisplacementMap in="SourceGraphic" in2="blur" scale="1" xChannelSelector="R" yChannelSelector="G" />
+                                </filter>
+                            </svg>
+        
+                            <div class="sahne">
+                                <div class="golge"></div>
+                                <div class="kutu">
+                                    <div class="katman cam-yuzey cam-kapak-on" style="transform: translateZ(45px);"></div>
+                                    <div class="katman govde katman-extra" style="transform: translateZ(44px);"></div>
+                                    <div class="katman govde katman-extra" style="transform: translateZ(43px);"></div>
+                                    <div class="katman govde katman-extra" style="transform: translateZ(42px);"></div>
+                                    <div class="katman govde katman-extra" style="transform: translateZ(41px);"></div>
+                                    <div class="katman govde katman-extra" style="transform: translateZ(40px);"></div>
+                                    <div class="katman govde katman-extra" style="transform: translateZ(39px);"></div>
+                                    <div class="katman govde katman-extra" style="transform: translateZ(38px);"></div>
+                                    <div class="katman govde katman-extra" style="transform: translateZ(37px);"></div>
+                                    <div class="katman govde katman-extra" style="transform: translateZ(36px);"></div>
+                                    <div class="katman govde katman-extra" style="transform: translateZ(35px);"></div>
+                                    <div class="katman govde katman-extra" style="transform: translateZ(34px);"></div>
+                                    <div class="katman govde katman-extra" style="transform: translateZ(33px);"></div>
+                                    <div class="katman govde katman-extra" style="transform: translateZ(32px);"></div>
+                                    <div class="katman govde katman-extra" style="transform: translateZ(31px);"></div>
+                                    <div class="katman govde katman-extra" style="transform: translateZ(30px);"></div>
+                                    <div class="katman govde katman-extra" style="transform: translateZ(29px);"></div>
+                                    <div class="katman govde katman-extra" style="transform: translateZ(28px);"></div>
+                                    <div class="katman govde katman-extra" style="transform: translateZ(27px);"></div>
+                                    <div class="katman govde katman-extra" style="transform: translateZ(26px);"></div>
+                                    <div class="katman govde katman-extra" style="transform: translateZ(25px);"></div>
+                                    <div class="katman govde katman-extra" style="transform: translateZ(24px);"></div>
+                                    <div class="katman govde katman-extra" style="transform: translateZ(23px);"></div>
+                                    <div class="katman govde katman-extra" style="transform: translateZ(22px);"></div>
+                                    <div class="katman govde katman-extra" style="transform: translateZ(21px);"></div>
+                                    <div class="katman govde katman-extra" style="transform: translateZ(20px);"></div>
+                                    <div class="katman govde katman-extra" style="transform: translateZ(19px);"></div>
+                                    <div class="katman govde katman-extra" style="transform: translateZ(18px);"></div>
+                                    <div class="katman govde katman-extra" style="transform: translateZ(17px);"></div>
+                                    <div class="katman govde katman-extra" style="transform: translateZ(16px);"></div>
+                                    <div class="katman govde katman-extra" style="transform: translateZ(15px);"></div>
+                                    <div class="katman govde" style="transform: translateZ(14px);"></div>
+                                    <div class="katman govde" style="transform: translateZ(13px);"></div>
+                                    <div class="katman govde" style="transform: translateZ(12px);"></div>
+                                    <div class="katman govde" style="transform: translateZ(11px);"></div>
+                                    <div class="katman govde" style="transform: translateZ(10px);"></div>
+                                    <div class="katman govde" style="transform: translateZ(9px);"></div>
+                                    <div class="katman govde" style="transform: translateZ(8px);"></div>
+                                    <div class="katman govde" style="transform: translateZ(7px);"></div>
+                                    <div class="katman govde" style="transform: translateZ(6px);"></div>
+                                    <div class="katman govde" style="transform: translateZ(5px);"></div>
+                                    <div class="katman govde" style="transform: translateZ(4px);"></div>
+                                    <div class="katman govde" style="transform: translateZ(3px);"></div>
+                                    <div class="katman govde" style="transform: translateZ(2px);"></div>
+                                    <div class="katman govde" style="transform: translateZ(1px);"></div>
+        
+                                    <div class="katman ikon-merkez">
+                                        <svg class="wp-logosu" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+                                          <title>phone-call-fill</title>
+                                          <g fill="none">
+                                            <!-- Telefon -->
+                                            <path fill="#ffffff" d="M6.857 2.445C8 3.278 8.89 4.415 9.65 5.503l.442.644l.417.615a1.504 1.504 0 0 1-.256 1.986l-1.951 1.449a.48.48 0 0 0-.142.616c.442.803 1.228 1.999 2.128 2.899s2.153 1.738 3.012 2.23a.483.483 0 0 0 .644-.162l1.27-1.933a1.503 1.503 0 0 1 2.056-.332l.663.459c1.239.86 2.57 1.837 3.588 3.14a1.47 1.47 0 0 1 .189 1.484c-.837 1.953-2.955 3.616-5.158 3.535l-.3-.017l-.233-.02l-.258-.03l-.281-.038l-.305-.05l-.16-.03l-.336-.072l-.176-.04l-.366-.094l-.385-.11l-.402-.13c-1.846-.626-4.189-1.856-6.593-4.26s-3.633-4.746-4.259-6.592l-.13-.402l-.11-.385l-.094-.366l-.078-.346a12 12 0 0 1-.063-.326l-.05-.305l-.04-.281l-.029-.258l-.02-.233l-.016-.3c-.081-2.196 1.6-4.329 3.544-5.162a1.47 1.47 0 0 1 1.445.159"/>
+                                        
+                                            <!-- 1. Sinyal -->
+                                            <path class="signal-1" fill="#ffffff" d="M14.992 6.04l.116.013a3.5 3.5 0 0 1 2.858 2.96a1 1 0 0 1-1.958.393l-.023-.115a1.5 1.5 0 0 0-1.07-1.233l-.155-.035a1 1 0 0 1 .232-1.983"/>
+                                        
+                                            <!-- 2. Sinyal -->
+                                            <path class="signal-2" fill="#ffffff" d="M15 3a6 6 0 0 1 6 6a1 1 0 0 1-1.993.117L19 9a4 4 0 0 0-3.738-3.991L15 5a1 1 0 1 1 0-2"/>
+                                        
+                                            <!-- 3. Sinyal (yeni eklenen en dış yay) -->
+                                            <path class="signal-3" fill="#ffffff" d="M15 0a9 9 0 0 1 9 9a1 1 0 0 1-1.993.117L22 9a7 7 0 0 0-6.738-6.991L15 2a1 1 0 1 1 0-2"/>
+                                          </g>
+                                        </svg>
+                                    </div>
+        
+                                    <div class="katman govde" style="transform: translateZ(-1px);"></div>
+                                    <div class="katman govde" style="transform: translateZ(-2px);"></div>
+                                    <div class="katman govde" style="transform: translateZ(-3px);"></div>
+                                    <div class="katman govde" style="transform: translateZ(-4px);"></div>
+                                    <div class="katman govde" style="transform: translateZ(-5px);"></div>
+                                    <div class="katman govde" style="transform: translateZ(-6px);"></div>
+                                    <div class="katman govde" style="transform: translateZ(-7px);"></div>
+                                    <div class="katman govde" style="transform: translateZ(-8px);"></div>
+                                    <div class="katman govde" style="transform: translateZ(-9px);"></div>
+                                    <div class="katman govde" style="transform: translateZ(-10px);"></div>
+                                    <div class="katman govde" style="transform: translateZ(-11px);"></div>
+                                    <div class="katman govde" style="transform: translateZ(-12px);"></div>
+                                    <div class="katman govde" style="transform: translateZ(-13px);"></div>
+                                    <div class="katman govde" style="transform: translateZ(-14px);"></div>
+                                    <div class="katman govde katman-extra" style="transform: translateZ(-15px);"></div>
+                                    <div class="katman govde katman-extra" style="transform: translateZ(-16px);"></div>
+                                    <div class="katman govde katman-extra" style="transform: translateZ(-17px);"></div>
+                                    <div class="katman govde katman-extra" style="transform: translateZ(-18px);"></div>
+                                    <div class="katman govde katman-extra" style="transform: translateZ(-19px);"></div>
+                                    <div class="katman govde katman-extra" style="transform: translateZ(-20px);"></div>
+                                    <div class="katman govde katman-extra" style="transform: translateZ(-21px);"></div>
+                                    <div class="katman govde katman-extra" style="transform: translateZ(-22px);"></div>
+                                    <div class="katman govde katman-extra" style="transform: translateZ(-23px);"></div>
+                                    <div class="katman govde katman-extra" style="transform: translateZ(-24px);"></div>
+                                    <div class="katman govde katman-extra" style="transform: translateZ(-25px);"></div>
+                                    <div class="katman govde katman-extra" style="transform: translateZ(-26px);"></div>
+                                    <div class="katman govde katman-extra" style="transform: translateZ(-27px);"></div>
+                                    <div class="katman govde katman-extra" style="transform: translateZ(-28px);"></div>
+                                    <div class="katman govde katman-extra" style="transform: translateZ(-29px);"></div>
+                                    <div class="katman govde katman-extra" style="transform: translateZ(-30px);"></div>
+                                    <div class="katman govde katman-extra" style="transform: translateZ(-31px);"></div>
+                                    <div class="katman govde katman-extra" style="transform: translateZ(-32px);"></div>
+                                    <div class="katman govde katman-extra" style="transform: translateZ(-33px);"></div>
+                                    <div class="katman govde katman-extra" style="transform: translateZ(-34px);"></div>
+                                    <div class="katman govde katman-extra" style="transform: translateZ(-35px);"></div>
+                                    <div class="katman govde katman-extra" style="transform: translateZ(-36px);"></div>
+                                    <div class="katman govde katman-extra" style="transform: translateZ(-37px);"></div>
+                                    <div class="katman govde katman-extra" style="transform: translateZ(-38px);"></div>
+                                    <div class="katman govde katman-extra" style="transform: translateZ(-39px);"></div>
+                                    <div class="katman govde katman-extra" style="transform: translateZ(-40px);"></div>
+                                    <div class="katman govde katman-extra" style="transform: translateZ(-41px);"></div>
+                                    <div class="katman govde katman-extra" style="transform: translateZ(-42px);"></div>
+                                    <div class="katman govde katman-extra" style="transform: translateZ(-43px);"></div>
+                                    <div class="katman govde katman-extra" style="transform: translateZ(-44px);"></div>
+                                    <div class="katman cam-yuzey cam-kapak-arka" style="transform: translateZ(-45px) rotateY(180deg);"></div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 6. 6'LI ÖZELLİK GRIDI -->
-    <section id="cozumler" class="features-grid-wrapper section-padding">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-badge">Kapsamlı Çözümler</span>
-                <h2 class="section-title">Tüm İhtiyaçlarınız Tek Platformda</h2>
-                <p class="section-desc">İhtiyacınız olan tüm araçlar, kusursuz bir uyum içinde çalışmak üzere tasarlandı.</p>
-            </div>
-            
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="icon-box">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                    </div>
-                    <h3>Işık Hızında</h3>
-                    <p>Optimize edilmiş veritabanı yapımız sayesinde sorgularınız milisaniyeler içinde yanıtlanır.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="icon-box">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
-                    </div>
-                    <h3>Banka Seviyesinde Güvenlik</h3>
-                    <p>Uçtan uca şifreleme ve gelişmiş yetkilendirme modelleri ile verileriniz kilit altında.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="icon-box">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
-                    </div>
-                    <h3>Sürekli Senkronizasyon</h3>
-                    <p>Tüm cihazlarınız arasında sıfır gecikme ile otomatik senkronizasyon.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="icon-box">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
-                    </div>
-                    <h3>Gelişmiş Analitik</h3>
-                    <p>Kullanıcı hareketlerini ve sistem performansını detaylı raporlarla izleyin.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="icon-box">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-                    </div>
-                    <h3>Ekip İşbirliği</h3>
-                    <p>Çoklu kullanıcı desteği ile projenizde kimin ne yaptığını anında görün.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="icon-box">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
-                    </div>
-                    <h3>Açık Kaynak Destekli</h3>
-                    <p>Topluluk tarafından desteklenen altyapı ile kodunuza her zaman hakim olun.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 7. BLOG / HABERLER -->
-    <section id="blog" class="blog-section section-padding" style="background-color: white;">
-        <div class="container">
-            <div class="section-header blog-header">
-                <div>
-                    <span class="section-badge">Güncellemeler</span>
-                    <h2 class="section-title" style="margin-bottom: 0;">Sektörden Son Haberler</h2>
-                </div>
-                <a href="#" class="btn btn-outline">Tümünü Gör</a>
-            </div>
-            
-            <div class="blog-grid">
-                <div class="blog-card">
-                    <div class="blog-img" style="background: linear-gradient(45deg, #CBD5E1, #94A3B8);"></div>
-                    <div class="blog-content">
-                        <span class="blog-category">Ürün Güncellemesi</span>
-                        <h3>Yeni Analitik Motorumuz Yayında</h3>
-                        <p style="margin-bottom: 20px; color: var(--text-muted);">Artık verilerinizi %40 daha hızlı işleyebilir ve görselleştirebilirsiniz.</p>
-                        <a href="#" class="btn-link">Devamını Oku →</a>
-                    </div>
-                </div>
-                <div class="blog-card">
-                    <div class="blog-img" style="background: linear-gradient(45deg, #0F172A, #334155);"></div>
-                    <div class="blog-content">
-                        <span class="blog-category">Rehber</span>
-                        <h3>Veri Güvenliğinde En İyi Pratikler</h3>
-                        <p style="margin-bottom: 20px; color: var(--text-muted);">2026 yılı için şirketinizin alması gereken 5 temel güvenlik önlemi.</p>
-                        <a href="#" class="btn-link">Devamını Oku →</a>
-                    </div>
-                </div>
-                <div class="blog-card">
-                    <div class="blog-img" style="background: linear-gradient(45deg, #2563EB, #60A5FA);"></div>
-                    <div class="blog-content">
-                        <span class="blog-category">Röportaj</span>
-                        <h3>Geleceğin Veri Mimarileri</h3>
-                        <p style="margin-bottom: 20px; color: var(--text-muted);">CTO'muz ile büyük veri ve kuantum hesaplama üzerine derinlemesine bir sohbet.</p>
-                        <a href="#" class="btn-link">Devamını Oku →</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 8. NASIL ÇALIŞIR (STEPS) -->
-    <section class="steps-wrapper section-padding">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-badge">Süreç</span>
-                <h2 class="section-title">Nasıl Çalışır?</h2>
-                <p class="section-desc">Sadece üç basit adımda karmaşık sistemlerinizi bize entegre edin.</p>
-            </div>
-            
-            <div class="steps-container">
-                <div class="steps-line"></div>
-                
-                <div class="step-item">
-                    <div class="step-circle">1</div>
-                    <h3>Hesap Oluşturun</h3>
-                    <p class="text-muted">Dakikalar içinde kayıt olun ve kontrol paneline erişin.</p>
-                </div>
-                <div class="step-item">
-                    <div class="step-circle">2</div>
-                    <h3>Verilerinizi Bağlayın</h3>
-                    <p class="text-muted">Mevcut veritabanlarınızı güvenli API'miz ile senkronize edin.</p>
-                </div>
-                <div class="step-item">
-                    <div class="step-circle">3</div>
-                    <h3>Analize Başlayın</h3>
-                    <p class="text-muted">Otomatik oluşturulan raporlarla hemen içgörü elde edin.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 9. SSS (FAQ) -->
-    <section class="faq-section section-padding">
-        <div class="container">
-            <div class="faq-container">
-                <div class="faq-content">
-                    <span class="section-badge">Destek</span>
-                    <h2 class="section-title">Sıkça Sorulan Sorular</h2>
-                    <p class="section-desc" style="margin-bottom: 30px;">Aklınıza takılan soruların cevaplarını burada bulabilirsiniz. Daha fazlası için bize ulaşın.</p>
-                    <a href="#" class="btn btn-outline">Destek Ekibiyle Görüş</a>
-                </div>
-                
-                <div class="faq-accordion">
-                    <!-- Basit CSS hover mantığı ile açılan menüler (Tıklama için Vanilla JS gerekir, hover kullanıyoruz) -->
-                    <div class="faq-item active"> <!-- İlkini açık bırakıyoruz göstermek için -->
-                        <div class="faq-question">Data Global güvenli mi? <span>+</span></div>
-                        <div class="faq-answer">Kesinlikle. Tüm verileriniz AES-256 bit şifreleme ile saklanır ve düzenli olarak güvenlik denetimlerinden geçeriz.</div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-question">Mevcut sistemime entegre edebilir miyim? <span>+</span></div>
-                        <div class="faq-answer">Evet, REST API ve Webhook desteklerimiz sayesinde piyasadaki hemen hemen tüm CRM ve ERP sistemleriyle uyumlu çalışıyoruz.</div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-question">İstediğim zaman iptal edebilir miyim? <span>+</span></div>
-                        <div class="faq-answer">Taahhüt yok. İstediğiniz zaman paneliniz üzerinden tek tıkla aboneliğinizi sonlandırabilirsiniz.</div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-question">Ücretsiz deneme süresi var mı? <span>+</span></div>
-                        <div class="faq-answer">Tüm planlarımızda 14 günlük kredi kartsız deneme süresi bulunmaktadır.</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 10. TESTIMONIALS (YORUMLAR) -->
-    <section class="testimonials-section section-padding" style="background-color: white;">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-badge">Referanslar</span>
-                <h2 class="section-title">Yenilikçi Ekiplerin Tercihi</h2>
-            </div>
-            
-            <div class="testimonials-grid">
-                <!-- Kart 1 -->
-                <div class="testimonial-card">
-                    <div class="stars">★★★★★</div>
-                    <p class="testimonial-text">"Veri işleme sürelerimiz günler alırken artık saniyeler içinde tamamlanıyor. Ekip olarak üretkenliğimiz inanılmaz arttı."</p>
-                    <div class="author">
-                        <div class="author-img"></div>
-                        <div class="author-info">
-                            <h4>Ahmet Yılmaz</h4>
-                            <p>CTO, TechStart</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- Kart 2 -->
-                <div class="testimonial-card">
-                    <div class="stars">★★★★★</div>
-                    <p class="testimonial-text">"Arayüzün sadeliği ve API belgelerinin kalitesi muazzam. Sisteme entegrasyonumuz sadece 2 gün sürdü."</p>
-                    <div class="author">
-                        <div class="author-img"></div>
-                        <div class="author-info">
-                            <h4>Ayşe Demir</h4>
-                            <p>Lead Developer</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- Kart 3 -->
-                <div class="testimonial-card">
-                    <div class="stars">★★★★★</div>
-                    <p class="testimonial-text">"Müşteri destek ekibi harika çalışıyor. Ne zaman takılsak 10 dakika içinde çözümle dönüş yapıyorlar."</p>
-                    <div class="author">
-                        <div class="author-img"></div>
-                        <div class="author-info">
-                            <h4>Can Kaya</h4>
-                            <p>Product Manager</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 11. PRICING (FİYATLANDIRMA) -->
-    <section id="fiyatlar" class="pricing-section section-padding">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-badge">Fiyatlandırma</span>
-                <h2 class="section-title">Şeffaf ve Esnek Paketler</h2>
-                <p class="section-desc">Sürpriz ödemeler yok. Sadece ihtiyacınız olan kadar ödeyin.</p>
-            </div>
-            
-            <div class="pricing-grid">
-                <!-- Temel Plan -->
-                <div class="pricing-card">
-                    <h3 class="plan-name">Başlangıç</h3>
-                    <div class="plan-price">₺299<span>/ay</span></div>
-                    <p class="text-muted" style="margin-bottom: 24px;">Küçük ekipler ve projeler için</p>
-                    <ul class="plan-features">
-                        <li>5 Kullanıcıya Kadar</li>
-                        <li>10GB Depolama</li>
-                        <li>Temel Analitik</li>
-                        <li>Topluluk Desteği</li>
-                    </ul>
-                    <a href="#" class="btn btn-outline">Seç</a>
-                </div>
-                
-                <!-- Pro Plan -->
-                <div class="pricing-card popular">
-                    <div class="popular-badge">En Çok Tercih Edilen</div>
-                    <h3 class="plan-name">Profesyonel</h3>
-                    <div class="plan-price">₺899<span>/ay</span></div>
-                    <p class="text-muted" style="margin-bottom: 24px;">Büyüyen işletmeler için</p>
-                    <ul class="plan-features">
-                        <li>Sınırsız Kullanıcı</li>
-                        <li>100GB Depolama</li>
-                        <li>Gelişmiş Analitik & Raporlama</li>
-                        <li>Öncelikli 7/24 Destek</li>
-                        <li>API Erişimi</li>
-                    </ul>
-                    <a href="#" class="btn btn-primary">Ücretsiz Dene</a>
-                </div>
-                
-                <!-- Enterprise Plan -->
-                <div class="pricing-card">
-                    <h3 class="plan-name">Kurumsal</h3>
-                    <div class="plan-price">Özel</div>
-                    <p class="text-muted" style="margin-bottom: 24px;">Büyük ölçekli operasyonlar için</p>
-                    <ul class="plan-features">
-                        <li>Sınırsız Her Şey</li>
-                        <li>Özel Sunucu Altyapısı</li>
-                        <li>Dedicated Hesap Yöneticisi</li>
-                        <li>Kişiselleştirilmiş SLA</li>
-                    </ul>
-                    <a href="#" class="btn btn-outline">Bize Ulaşın</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 12. FINAL CTA -->
-    <section class="final-cta">
-        <div class="container">
-            <h2>İş Akışınızı Dönüştürmeye Hazır mısınız?</h2>
-            <p>Binlerce yenilikçi ekibin arasına katılın. 14 günlük ücretsiz deneme sürenizi hemen başlatın, kredi kartı gerekmez.</p>
-            
-            <form class="cta-form" onsubmit="event.preventDefault();">
-                <input type="email" placeholder="şirketiniz@email.com" required>
-                <button type="submit" class="btn btn-primary" style="padding: 16px 32px; font-size: 16px;">Hemen Başla</button>
-            </form>
-        </div>
-    </section>
-
-    <!-- 13. FOOTER -->
-    <footer class="site-footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <a href="#" class="logo">
-                        <div class="logo-icon"></div>
-                        Data Global
                     </a>
-                    <p>Veri çözümlerinde yenilikçi yaklaşımlar. İşletmenizin dijital potansiyelini bizimle açığa çıkarın.</p>
-                </div>
-                
-                <div class="footer-column">
-                    <h4 class="footer-title">Ürün</h4>
-                    <ul class="footer-links">
-                        <li><a href="#">Özellikler</a></li>
-                        <li><a href="#">Entegrasyonlar</a></li>
-                        <li><a href="#">Fiyatlandırma</a></li>
-                        <li><a href="#">Güncellemeler</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-column">
-                    <h4 class="footer-title">Çözümler</h4>
-                    <ul class="footer-links">
-                        <li><a href="#">Startuplar İçin</a></li>
-                        <li><a href="#">E-Ticaret İçin</a></li>
-                        <li><a href="#">Kurumsallar İçin</a></li>
-                        <li><a href="#">Geliştiriciler İçin</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-column">
-                    <h4 class="footer-title">Kaynaklar</h4>
-                    <ul class="footer-links">
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Dokümantasyon</a></li>
-                        <li><a href="#">Yardım Merkezi</a></li>
-                        <li><a href="#">API Referansı</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-column">
-                    <h4 class="footer-title">Şirket</h4>
-                    <ul class="footer-links">
-                        <li><a href="#">Hakkımızda</a></li>
-                        <li><a href="#">Kariyer</a></li>
-                        <li><a href="#">İletişim</a></li>
-                        <li><a href="#">Gizlilik Politikası</a></li>
-                    </ul>
                 </div>
             </div>
-            
-            <div class="footer-bottom">
-                <div class="copyright">
-                    &copy; 2026 Data Global Teknoloji. Tüm hakları saklıdır.
+        </div>
+
+        <div class="map-container reveal-item delay-1">
+            <a href="https://www.google.com/maps/search/?api=1&query=Mesudiye+Mah.+5103+Sk.+Cumhuriyet+İş+Merkezi+No:+28+Akdeniz+Mersin" target="_blank" class="map-overlay" title="Google Haritalar'da Aç">
+                <div class="map-address-badge">
+                    Mesudiye Mah. 5103 Sk. Cumhuriyet İş Merkezi No: 28 Akdeniz / Mersin
                 </div>
-                <div class="social-links">
-                    <a href="#"></a>
-                    <a href="#"></a>
-                    <a href="#"></a>
-                    <a href="#"></a>
-                </div>
+            </a>
+            <iframe src="https://maps.google.com/maps?q=Mesudiye%20Mah.%205103%20Sk.%20Cumhuriyet%20%C4%B0%C5%9F%20Merkezi%20No%3A%2028%20Akdeniz%20%2F%20Mersin&t=&z=15&ie=UTF8&iwloc=&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+
+        <div class="footer-content">
+            <div class="footer-bottom" style="margin-top: 0;">
+                &copy; 2026 Data Global Teknoloji. Tüm Hakları Saklıdır.
             </div>
         </div>
     </footer>
-    
-    <!-- Basit Etkileşimler İçin Vanilla JS (Hover yerine tıklama ile çalışan SSS vb. için eklenebilir) -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // FAQ Accordion Script
-            const faqItems = document.querySelectorAll('.faq-item');
-            
-            faqItems.forEach(item => {
-                item.addEventListener('click', function() {
-                    if(this.classList.contains('active')) {
-                        this.classList.remove('active');
-                        return;
-                    }
-                    faqItems.forEach(faq => faq.classList.remove('active'));
-                    this.classList.add('active');
-                });
-            });
 
-            // Mobil Menü (Hamburger) Script
-            const mobileBtn = document.getElementById('mobileMenuBtn');
-            const mainNav = document.getElementById('mainNav');
-            
-            if(mobileBtn && mainNav) {
-                mobileBtn.addEventListener('click', function() {
-                    mainNav.classList.toggle('is-open');
-                    
-                    // Buton ikonunu menü durumuna göre değiştir (Menü / Çarpı)
-                    if(mainNav.classList.contains('is-open')) {
-                        mobileBtn.innerHTML = '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>';
-                    } else {
-                        mobileBtn.innerHTML = '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>';
+    <!-- Lazy Load & Reveal Animation Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Scroll Reveal Animations
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in-view');
+                        // Opsiyonel: Sadece bir kez çalışsın isterseniz alttaki satırı aktif bırakın.
+                        observer.unobserve(entry.target);
                     }
                 });
-                
-                // Menü içindeki bir linke tıklanınca menüyü kapat
-                const navLinks = mainNav.querySelectorAll('a');
-                navLinks.forEach(link => {
+            }, { rootMargin: '0px 0px -50px 0px', threshold: 0.1 });
+
+            document.querySelectorAll('.reveal-item').forEach(el => revealObserver.observe(el));
+
+            // 2. Background Image Lazy Loading
+            const bgObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const bgUrl = entry.target.getAttribute('data-bg');
+                        if (bgUrl) {
+                            entry.target.style.backgroundImage = `url('${bgUrl}')`;
+                            entry.target.removeAttribute('data-bg');
+                        }
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { rootMargin: '0px 0px 300px 0px' }); // Görünür olmadan hemen önce yükle
+
+            document.querySelectorAll('.lazy-bg').forEach(el => bgObserver.observe(el));
+            
+            // İlk yüklemede Hero kısmını hemen göster
+            setTimeout(() => {
+                const hero = document.querySelector('.hero-content');
+                if(hero) hero.classList.add('in-view');
+            }, 100);
+
+            // 3. Mobile Menu Toggle
+            const hamburger = document.getElementById('hamburger');
+            const navLinks = document.getElementById('nav-links');
+
+            if(hamburger && navLinks) {
+                hamburger.addEventListener('click', () => {
+                    hamburger.classList.toggle('active');
+                    navLinks.classList.toggle('active');
+                });
+
+                document.querySelectorAll('.nav-links a').forEach(link => {
                     link.addEventListener('click', () => {
-                        mainNav.classList.remove('is-open');
-                        mobileBtn.innerHTML = '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>';
+                        hamburger.classList.remove('active');
+                        navLinks.classList.remove('active');
                     });
                 });
             }
